@@ -1,0 +1,18 @@
+* {
+  box-sizing: border-box; }
+
+html {
+  min-height: 100%; }
+
+body, input, textarea, button {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px; }
+
+input {
+  padding: 0.4em; }
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background: center center #27BF8F radial-gradient(circle at 1em 1em, #2FE5AB 0, #27BF8F 100%) no-repeat; }

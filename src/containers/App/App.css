@@ -1,0 +1,18 @@
+.App {
+  margin: 0 auto;
+  max-width: 38.5em; }
+  .App h1 {
+    text-align: center;
+    letter-spacing: 0.05em;
+    font-size: 3em;
+    margin-bottom: 0; }
+  .App header {
+    margin-bottom: 1em; }
+  .App section {
+    background: white;
+    padding: 1em; }
+  .App footer {
+    text-align: center;
+    color: #666; }
+    .App footer a {
+      color: gray; }
