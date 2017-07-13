@@ -148,4 +148,78 @@ describe('Board', () => {
 
   });
 
+  describe('playPiece', () => {
+
+    it('won\'t let a user play in a full column', () => {
+      const board = makeBoard(
+        '_ _ A _ _ _ _' +
+        '_ _ B _ _ _ _' +
+        '_ _ A _ _ _ _' +
+        '_ _ B _ _ _ _' +
+        '_ _ B _ _ _ _' +
+        '_ _ B A B B _'
+      );
+
+      const result = Board.playPiece(board, 2, PLAYER_A);
+
+      expect(result).toEqual(board); // No change
+    });
+
+    it('will let you play a few moves', () => {
+      const stage1 = makeBoard(
+        '_ _ _ _ _ _ _' +
+        '_ _ _ _ _ _ _' +
+        '_ _ _ _ _ _ _' +
+        '_ _ _ _ _ _ _' +
+        '_ _ _ _ _ _ _' +
+        '_ _ _ _ _ _ _'
+      );
+
+      const stage2 = makeBoard(
+        '_ _ _ _ _ _ _' +
+        '_ _ _ _ _ _ _' +
+        '_ _ _ _ _ _ _' +
+        '_ _ _ _ _ _ _' +
+        '_ _ _ _ _ _ _' +
+        '_ _ A _ _ _ _'
+      );
+
+      expect(Board.playPiece(stage1, 2, PLAYER_A)).toEqual(stage2);
+
+      const stage3 = makeBoard(
+        '_ _ _ _ _ _ _' +
+        '_ _ _ _ _ _ _' +
+        '_ _ _ _ _ _ _' +
+        '_ _ _ _ _ _ _' +
+        '_ _ _ _ _ _ _' +
+        '_ _ A B _ _ _'
+      );
+
+      expect(Board.playPiece(stage2, 3, PLAYER_B)).toEqual(stage3);
+
+      const stage4 = makeBoard(
+        '_ _ _ _ _ _ _' +
+        '_ _ _ _ _ _ _' +
+        '_ _ _ _ _ _ _' +
+        '_ _ _ _ _ _ _' +
+        '_ _ A _ _ _ _' +
+        '_ _ A B _ _ _'
+      );
+
+      expect(Board.playPiece(stage3, 2, PLAYER_A)).toEqual(stage4);
+
+      const stage5 = makeBoard(
+        '_ _ _ _ _ _ _' +
+        '_ _ _ _ _ _ _' +
+        '_ _ _ _ _ _ _' +
+        '_ _ _ _ _ _ _' +
+        '_ _ A _ _ _ _' +
+        '_ _ A B B _ _'
+      );
+
+      expect(Board.playPiece(stage4, 4, PLAYER_B)).toEqual(stage5);
+    });
+
+  });
+
 });

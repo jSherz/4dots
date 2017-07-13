@@ -25,7 +25,7 @@ export class GameBoard extends Component {
           <GamePiece
             column={column}
             key={`piece_${column}_${row}`}
-            player={player || PLAYER_NONE}
+            player={player || Players.PLAYER_NONE}
             row={row}
             topPiece={row === 0}
           />

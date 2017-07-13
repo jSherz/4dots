@@ -54,7 +54,11 @@ export class Board {
 
   static playPiece(board, column, player) {
     // Find truthy pieces (ones that have been played)
-    const numPiecesInColumn = Board.piecesInColumn(board, column).filter((p) => p).length;
+    const numPiecesInColumn =
+      Board
+        .piecesInColumn(board, column)
+        .filter((p) => p === Players.PLAYER_A || p === Players.PLAYER_B)
+        .length;
 
     // Ensure we have space to play a piece here
     if (numPiecesInColumn < Board.NUM_ROWS) {

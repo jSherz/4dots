@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+
 import './GamePiece.css';
 import lemon from './images/lemon.png';
 import watermelon from './images/watermelon.png';
-import { PLAYER_A, PLAYER_B, PLAYER_NONE } from '../../reducers/game';
+import { Players } from '../../model';
 
 export class GamePiece extends Component {
 
   static propTypes = {
     column: PropTypes.number.isRequired,
     onColumnClicked: PropTypes.func.isRequired,
-    player: PropTypes.oneOf([ PLAYER_A, PLAYER_B, PLAYER_NONE ]),
+    player: PropTypes.oneOf([...Players.VALID_PLAYERS, Players.PLAYER_NONE]),
     row: PropTypes.number.isRequired,
     topPiece: PropTypes.bool.isRequired
   };
@@ -18,9 +19,9 @@ export class GamePiece extends Component {
   renderPlayerImage() {
     const { player } = this.props;
 
-    if (player === PLAYER_A) {
+    if (player === Players.PLAYER_A) {
       return <img src={lemon} alt="Player A" className="GamePieceLemon"/>
-    } else if (player === PLAYER_B) {
+    } else if (player === Players.PLAYER_B) {
       return <img src={watermelon} alt="Player B" className="GamePieceWatermelon"/>
     } else {
       return null;
