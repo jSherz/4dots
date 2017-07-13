@@ -5,14 +5,13 @@ import './App.css';
 import GameBoard from '../GameBoard';
 import PlayerModal from '../PlayerModal';
 import { Players } from '../../model';
-import { PLAYER_A, PLAYER_B } from '../../reducers/game';
 
 class App extends Component {
 
   static propTypes = {
-    currentPlayer: PropTypes.oneOf([ PLAYER_A, PLAYER_B ]),
+    currentPlayer: PropTypes.oneOf(Players.VALID_PLAYERS).isRequired,
     gameStarted: PropTypes.bool.isRequired,
-    players: PropTypes.shape(Players)
+    players: PropTypes.shape(Players.propTypes).isRequired
   };
 
   renderCurrentPlayer() {

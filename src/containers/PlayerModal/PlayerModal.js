@@ -2,21 +2,20 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { Players } from '../../model';
-import { PLAYER_A, PLAYER_B } from '../../reducers/game';
 import './PlayerModal.css';
 
 export class PlayerModal extends Component {
 
   static propTypes = {
-    players: PropTypes.shape(Players).isRequired,
+    players: PropTypes.shape(Players.propTypes).isRequired,
     startGame: PropTypes.func.isRequired,
     updatePlayerA: PropTypes.func.isRequired,
     updatePlayerB: PropTypes.func.isRequired
   };
 
   render() {
-    const playerA = this.props.players[ PLAYER_A ].name;
-    const playerB = this.props.players[ PLAYER_B ].name;
+    const playerA = this.props.players[ Players.PLAYER_A ].name;
+    const playerB = this.props.players[ Players.PLAYER_B ].name;
     const { startGame, updatePlayerA, updatePlayerB } = this.props;
 
     return (

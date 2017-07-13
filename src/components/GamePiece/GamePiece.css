@@ -6,7 +6,8 @@
   text-align: center; }
 
 .GamePieceColumn {
-  display: inline-block;
+  display: block;
+  float: left;
   cursor: pointer; }
   .GamePieceColumn:hover {
     background: #E0FFDC; }

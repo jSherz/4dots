@@ -1,18 +1,15 @@
 import * as GameActions from '../actions/game';
-import { Player } from '../model/Player';
-
-export const PLAYER_A = 'PLAYER_A';
-export const PLAYER_B = 'PLAYER_B';
-export const PLAYER_NONE = 'PLAYER_NONE';
+import { Player, Players } from '../model';
+import { Board } from '../model/Board';
 
 const initialState = {
-  currentPlayer: PLAYER_A,
+  currentPlayer: Players.PLAYER_A,
   // TODO: Init with a real game board
-  gameBoard: {},
+  gameBoard: Board.create(),
   gameStarted: false,
   players: {
-    [PLAYER_A]: new Player(''),
-    [PLAYER_B]: new Player('')
+    [Players.PLAYER_A]: new Player(''),
+    [Players.PLAYER_B]: new Player('')
   }
 };
 
@@ -34,7 +31,7 @@ export const gameReducer = (state = initialState, action) => {
     case GameActions.RESET_GAME:
       return {
         ...state,
-        gameBoard: {}
+        gameBoard: Board.create()
       };
 
     // case GameActions.UPDATE_GAME_BOARD:
@@ -47,11 +44,13 @@ export const gameReducer = (state = initialState, action) => {
     //   };
 
     case GameActions.PLACE_PIECE:
-      const nextPlayer = state.currentPlayer === PLAYER_A ? PLAYER_B : PLAYER_A;
+      const nextPlayer = state.currentPlayer === Players.PLAYER_A ? Players.PLAYER_B : Players.PLAYER_A;
+      const { currentPlayer, gameBoard } = state;
 
       return {
         ...state,
-        currentPlayer: nextPlayer
+        currentPlayer: nextPlayer,
+        gameBoard: Board.playPiece(gameBoard, action.payload, currentPlayer)
       };
 
     case GameActions.UPDATE_PLAYER:
