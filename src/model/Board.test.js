@@ -222,4 +222,161 @@ describe('Board', () => {
 
   });
 
+  describe('findWinner', () => {
+
+    it('with no winner, returns null', () => {
+      const board = makeBoard(
+        '_ _ _ _ _ _ _' +
+        '_ _ _ _ _ _ _' +
+        '_ _ _ _ _ _ _' +
+        '_ _ _ _ _ _ _' +
+        '_ _ A _ _ _ _' +
+        '_ _ B B B A _'
+      );
+
+      expect(Board.findWinner(board)).toEqual(null);
+    });
+
+    it('finds a winner in a column', () => {
+      const examples = [
+        makeBoard(
+          '_ _ _ _ _ _ _' +
+          '_ _ _ _ _ _ _' +
+          'A _ _ _ _ _ _' +
+          'A _ _ _ _ _ _' +
+          'A _ _ _ _ B _' +
+          'A _ B B B A _'
+        ),
+        makeBoard(
+          '_ _ _ _ _ _ _' +
+          '_ _ _ _ _ _ _' +
+          '_ _ _ _ _ _ B' +
+          'A _ _ A _ _ B' +
+          'A _ A A _ B B' +
+          'A _ B B B A B'
+        ),
+        makeBoard(
+          '_ _ _ _ _ _ _' +
+          '_ _ _ _ _ _ _' +
+          '_ _ A A _ _ _' +
+          '_ _ A B B _ _' +
+          '_ _ A A B _ _' +
+          '_ _ A B B _ _'
+        )
+      ];
+
+      const expected = [PLAYER_A, PLAYER_B, PLAYER_A];
+
+      examples.forEach((example, index) => {
+        expect(Board.findWinner(example)).toEqual(expected[index]);
+      })
+    });
+
+    it('finds a winner in a row', () => {
+      const examples = [
+        makeBoard(
+          '_ _ _ _ _ _ _' +
+          '_ _ _ _ _ _ _' +
+          '_ _ _ _ _ _ _' +
+          '_ _ _ _ _ _ _' +
+          '_ _ _ _ _ A _' +
+          '_ B B B B A _'
+        ),
+        makeBoard(
+          '_ B B B B A _' +
+          '_ A A B A A _' +
+          '_ B A B B B _' +
+          '_ A B A A A _' +
+          '_ B A A B A _' +
+          '_ A A A B A _'
+        ),
+        makeBoard(
+          '_ _ _ _ _ _ _' +
+          '_ _ _ _ _ _ _' +
+          '_ _ _ _ _ _ _' +
+          '_ _ _ _ _ _ _' +
+          '_ _ B A A A A' +
+          '_ B A B A B B'
+        )
+      ];
+
+      const expected = [PLAYER_B, PLAYER_B, PLAYER_A];
+
+      examples.forEach((example, index) => {
+        expect(Board.findWinner(example)).toEqual(expected[index]);
+      })
+    });
+
+    it('finds a winner on a up and right diagonal', () => {
+      const examples = [
+        makeBoard(
+          '_ _ _ _ _ _ _' +
+          '_ _ _ _ _ _ _' +
+          '_ _ _ B _ _ _' +
+          '_ _ B A _ _ _' +
+          '_ B B A A _ _' +
+          'B A A A B _ _'
+        ),
+        makeBoard(
+          '_ _ _ _ _ _ A' +
+          '_ _ _ _ _ A B' +
+          '_ _ _ _ A B A' +
+          '_ _ _ A B B B' +
+          '_ _ B A B A A' +
+          '_ B A B A A B'
+        ),
+        makeBoard(
+          '_ _ _ _ _ _ _' +
+          '_ _ _ _ _ A _' +
+          '_ _ _ _ A B _' +
+          '_ _ _ A B A _' +
+          '_ _ A B B B _' +
+          '_ B A B A A _'
+        )
+      ];
+
+      const expected = [PLAYER_B, PLAYER_A, PLAYER_A];
+
+      examples.forEach((example, index) => {
+        expect(Board.findWinner(example)).toEqual(expected[index]);
+      });
+    });
+
+    it('finds a winner on a up and left diagonal', () => {
+      const examples = [
+        makeBoard(
+          '_ _ _ _ _ _ _' +
+          '_ _ _ _ _ _ _' +
+          '_ _ _ B _ _ _' +
+          '_ _ _ A B _ _' +
+          '_ _ A A B B _' +
+          '_ _ B A A A B'
+        ),
+        makeBoard(
+          'A _ _ _ _ _ _' +
+          'B A _ _ _ _ _' +
+          'A B A _ _ _ _' +
+          'B B B A _ _ _' +
+          'A A B A B _ _' +
+          'B A A B A B _'
+        ),
+        makeBoard(
+          '_ _ _ _ _ _ _' +
+          '_ A _ _ _ _ _' +
+          '_ B A _ _ _ _' +
+          '_ A B A _ _ _' +
+          '_ B B B A _ _' +
+          '_ A A B A B _'
+        )
+      ];
+
+      const expected = [PLAYER_B, PLAYER_A, PLAYER_A];
+
+      examples.forEach((example, index) => {
+        expect(Board.findWinner(example)).toEqual(expected[index]);
+      });
+    });
+
+  });
+
 });
