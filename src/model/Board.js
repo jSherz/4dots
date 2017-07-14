@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import every from 'lodash/every';
 
-import { Players } from './';
+import { Players } from './Players';
 
 /**
  * All of the pieces are a valid player and are the same.
@@ -41,7 +41,7 @@ export class Board {
   static WIN_LENGTH = 4;
 
   static propTypes = {
-    pieces: PropTypes.arrayOf(PropTypes.number)
+    pieces: PropTypes.arrayOf(PropTypes.oneOf([...Players.VALID_PLAYERS, Players.PLAYER_NONE]))
   };
 
   pieces;

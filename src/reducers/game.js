@@ -31,27 +31,30 @@ export const gameReducer = (state = initialState, action) => {
     case GameActions.RESET_GAME:
       return {
         ...state,
-        gameBoard: Board.create()
+        currentPlayer: state.winner === Players.PLAYER_A ? Players.PLAYER_B : Players.PLAYER_A,
+        gameBoard: Board.create(),
+        winner: null
       };
-
-    // case GameActions.UPDATE_GAME_BOARD:
-    //   const nextPlayer = state.currentPlayer === PLAYER_A ? PLAYER_B : PLAYER_A;
-    //
-    //   return {
-    //     ...state,
-    //     currentPlayer: nextPlayer,
-    //     gameBoard: action.payload
-    //   };
 
     case GameActions.PLACE_PIECE:
-      const nextPlayer = state.currentPlayer === Players.PLAYER_A ? Players.PLAYER_B : Players.PLAYER_A;
+      const column = action.payload;
       const { currentPlayer, gameBoard } = state;
 
-      return {
-        ...state,
-        currentPlayer: nextPlayer,
-        gameBoard: Board.playPiece(gameBoard, action.payload, currentPlayer)
-      };
+      // Check there's room to place a piece here
+      if (Board.lowestFreeSpace(gameBoard, column) !== null) {
+        const nextPlayer = state.currentPlayer === Players.PLAYER_A ? Players.PLAYER_B : Players.PLAYER_A;
+        const updatedBoard = Board.playPiece(gameBoard, action.payload, currentPlayer);
+        const winner = Board.findWinner(updatedBoard);
+
+        return {
+          ...state,
+          currentPlayer: nextPlayer,
+          gameBoard: updatedBoard,
+          winner
+        };
+      } else {
+        return state;
+      }
 
     case GameActions.UPDATE_PLAYER:
       const { player, name } = action.payload;
