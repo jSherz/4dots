@@ -99,3 +99,64 @@ resource "aws_instance" "4dots_1" {
     Name = "4dots"
   }
 }
+
+# A home for our custom containers
+resource "aws_ecr_repository" "4dots" {
+  name = "4dots"
+}
+
+resource "aws_iam_group" "4dots_container_artists" {
+  name = "4dots_container_artists"
+}
+
+resource "aws_iam_role" "4dots_container_artists" {
+  name = "4dots_container_artists"
+
+  assume_role_policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [{
+    "Effect": "Allow",
+    "Principal": {
+       "Service": ["ec2.amazonaws.com"]
+    },
+    "Action": ["sts:AssumeRole"]
+  }]
+}
+EOF
+}
+
+resource "aws_ecr_repository_policy" "4dots" {
+  repository = "${aws_ecr_repository.4dots.name}"
+
+  policy = <<EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "4dotsContainerArtistsAccessECR",
+            "Effect": "Allow",
+            "Principal": {
+              "AWS": "${aws_iam_role.4dots_container_artists.arn}"
+            },
+            "Action": [
+                "ecr:GetDownloadUrlForLayer",
+                "ecr:BatchGetImage",
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:PutImage",
+                "ecr:InitiateLayerUpload",
+                "ecr:UploadLayerPart",
+                "ecr:CompleteLayerUpload",
+                "ecr:DescribeRepositories",
+                "ecr:GetRepositoryPolicy",
+                "ecr:ListImages",
+                "ecr:DeleteRepository",
+                "ecr:BatchDeleteImage",
+                "ecr:SetRepositoryPolicy",
+                "ecr:DeleteRepositoryPolicy"
+            ]
+        }
+    ]
+}
+EOF
+}

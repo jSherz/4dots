@@ -1,15 +1,13 @@
 # Virtual network for our application
 # See: https://aws.amazon.com/documentation/vpc/
 resource "aws_vpc" "4dots" {
-  cidr_block           = "10.0.0.0/16"
+  cidr_block = "10.0.0.0/16"
   enable_dns_hostnames = true
 
   tags {
     Name = "4dots"
   }
 }
-
-# Two subnets to allow Lambda to be highly available (one AZ = one subnet)
 
 resource "aws_subnet" "4dots_primary" {
   vpc_id            = "${aws_vpc.4dots.id}"
