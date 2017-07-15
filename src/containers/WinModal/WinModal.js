@@ -8,7 +8,7 @@ import './WinModal.css';
 export class WinModal extends Component {
 
   static propTypes = {
-    winner: PropTypes.shape(Player).isRequired
+    winner: PropTypes.shape(Player.propTypes).isRequired
   };
 
   render() {
