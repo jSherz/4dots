@@ -3,5 +3,6 @@ node_js:
   - "6"
 script:
   - yarn run build-css
-  - yarn run test
+  - yarn run test -- --coverage
+  - yarn run coveralls
   - yarn run build
