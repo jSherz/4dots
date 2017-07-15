@@ -26,5 +26,11 @@ $button-colour: #27BF8F
       border: 0
       padding: 0.3em 1em
 
+      &:hover
+        background: linear-gradient(to top, lighten($button-colour, 10%) 0%, lighten($button-colour, 20%) 100%)
+
+      &:disabled
+        background: #ccc
+
   input
     width: 100%

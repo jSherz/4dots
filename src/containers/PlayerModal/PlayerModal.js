@@ -18,6 +18,7 @@ export class PlayerModal extends Component {
     const playerA = this.props.players[Players.PLAYER_A].name;
     const playerB = this.props.players[Players.PLAYER_B].name;
     const { startGame, updatePlayerA, updatePlayerB } = this.props;
+    const canContinue = playerA.length >= 1 && playerB.length >= 1;
 
     return (
       <Modal>
@@ -33,7 +34,10 @@ export class PlayerModal extends Component {
           </li>
 
           <li className="player-modal-controls">
-            <button onClick={startGame}>Play</button>
+            <button
+              disabled={canContinue ? null : 'disabled'}
+              onClick={startGame}
+            >Play</button>
           </li>
         </ul>
       </Modal>
@@ -41,3 +45,5 @@ export class PlayerModal extends Component {
   }
 
 }
+
+export default PlayerModal;
