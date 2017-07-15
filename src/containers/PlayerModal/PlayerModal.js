@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Players } from '../../model';
 import './PlayerModal.css';
+import Modal from '../../components/Modal';
 
 export class PlayerModal extends Component {
 
@@ -14,30 +15,28 @@ export class PlayerModal extends Component {
   };
 
   render() {
-    const playerA = this.props.players[ Players.PLAYER_A ].name;
-    const playerB = this.props.players[ Players.PLAYER_B ].name;
+    const playerA = this.props.players[Players.PLAYER_A].name;
+    const playerB = this.props.players[Players.PLAYER_B].name;
     const { startGame, updatePlayerA, updatePlayerB } = this.props;
 
     return (
-      <div id="player-modal-wrapper">
-        <div id="player-modal">
-          <ul>
-            <li>
-              <label htmlFor="player-a-name">Player A</label>
-              <input id="player-a-name" value={playerA} onChange={updatePlayerA}/>
-            </li>
+      <Modal>
+        <ul id="player-modal">
+          <li>
+            <label htmlFor="player-a-name">Player A</label>
+            <input id="player-a-name" value={playerA} onChange={updatePlayerA}/>
+          </li>
 
-            <li>
-              <label htmlFor="player-b-name">Player B</label>
-              <input id="player-b-name" value={playerB} onChange={updatePlayerB}/>
-            </li>
+          <li>
+            <label htmlFor="player-b-name">Player B</label>
+            <input id="player-b-name" value={playerB} onChange={updatePlayerB}/>
+          </li>
 
-            <li className="player-modal-controls">
-              <button onClick={startGame}>Play</button>
-            </li>
-          </ul>
-        </div>
-      </div>
+          <li className="player-modal-controls">
+            <button onClick={startGame}>Play</button>
+          </li>
+        </ul>
+      </Modal>
     );
   }
 

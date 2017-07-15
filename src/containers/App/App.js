@@ -5,13 +5,15 @@ import './App.css';
 import GameBoard from '../GameBoard';
 import PlayerModal from '../PlayerModal';
 import { Players } from '../../model';
+import WinModal from '../WinModal';
 
 class App extends Component {
 
   static propTypes = {
     currentPlayer: PropTypes.oneOf(Players.VALID_PLAYERS).isRequired,
     gameStarted: PropTypes.bool.isRequired,
-    players: PropTypes.shape(Players.propTypes).isRequired
+    players: PropTypes.shape(Players.propTypes).isRequired,
+    winner: PropTypes.string
   };
 
   renderCurrentPlayer() {
@@ -28,7 +30,7 @@ class App extends Component {
   }
 
   render() {
-    const { gameStarted } = this.props;
+    const { gameStarted, winner } = this.props;
 
     return (
       <div id="app" className="App">
@@ -42,6 +44,7 @@ class App extends Component {
           <GameBoard/>
 
           {gameStarted || <PlayerModal/>}
+          {winner && <WinModal/>}
         </section>
 
         <footer>
