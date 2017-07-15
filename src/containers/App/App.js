@@ -19,7 +19,7 @@ class App extends Component {
   renderCurrentPlayer() {
     if (this.props.gameStarted) {
       const { currentPlayer, players } = this.props;
-      const playerName = players[ currentPlayer ].name;
+      const playerName = players[currentPlayer].name;
 
       return (
         <p id="intro">The current player is <strong>{playerName}</strong>.</p>
