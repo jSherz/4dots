@@ -11,7 +11,7 @@ const PLAYER_NONE = Players.PLAYER_NONE;
  * Test data can be a PITA, so make it easier to construct a board from an ASCII representation.
  * @param art
  */
-const makeBoard = (art) => {
+export const makeBoard = (art) => {
   const stripped = art.replace(/[ \\n]/g, '');
 
   const asciiToPlayer = (ascii) => {
@@ -83,7 +83,8 @@ describe('Board', () => {
         { index: 41, x: 6, y: 5 },
         // random other squares
         { index: 30, x: 2, y: 4 },
-        { index: 33, x: 5, y: 4 }
+        { index: 33, x: 5, y: 4 },
+        { index: 1, x: 1, y: 0 }
       ];
 
       examples.forEach((example) => {
