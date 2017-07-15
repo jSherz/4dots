@@ -81,6 +81,7 @@ resource "aws_instance" "4dots_1" {
   ami           = "${data.aws_ami.ecs.id}"
   user_data     = "${data.template_file.ecs_user_data.rendered}"
   key_name      = "${aws_key_pair.4dots_james.key_name}"
+  monitoring    = true
 
   depends_on = [
     "aws_internet_gateway.4dots_gw",
