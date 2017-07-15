@@ -4,7 +4,6 @@ import { Board } from '../model/Board';
 
 const initialState = {
   currentPlayer: Players.PLAYER_A,
-  // TODO: Init with a real game board
   gameBoard: Board.create(),
   gameStarted: false,
   players: {
@@ -12,13 +11,6 @@ const initialState = {
     [Players.PLAYER_B]: new Player('')
   }
 };
-
-
-// TODO: Add function to check if column is full
-
-// TODO: Add function to check for win
-
-// TODO: Tests!
 
 export const gameReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -29,12 +21,7 @@ export const gameReducer = (state = initialState, action) => {
       };
 
     case GameActions.RESET_GAME:
-      return {
-        ...state,
-        currentPlayer: state.winner === Players.PLAYER_A ? Players.PLAYER_B : Players.PLAYER_A,
-        gameBoard: Board.create(),
-        winner: null
-      };
+      return initialState;
 
     case GameActions.PLACE_PIECE:
       const column = action.payload;
@@ -73,3 +60,5 @@ export const gameReducer = (state = initialState, action) => {
       return state
   }
 };
+
+export default gameReducer;
