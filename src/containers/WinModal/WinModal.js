@@ -8,11 +8,12 @@ import './WinModal.css';
 export class WinModal extends Component {
 
   static propTypes = {
+    submitScore: PropTypes.func.isRequired,
     winner: PropTypes.shape(Player.propTypes).isRequired
   };
 
   render() {
-    const { winner } = this.props;
+    const { submitScore, winner } = this.props;
 
     return (
       <Modal>
@@ -20,7 +21,7 @@ export class WinModal extends Component {
           <p>Congratulations, <strong>{winner.name}</strong> - you win!</p>
 
           <p id="win-modal-controls">
-            <button>Submit score</button>
+            <button onClick={submitScore}>Submit score</button>
           </p>
         </div>
       </Modal>

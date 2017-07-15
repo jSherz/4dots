@@ -2,6 +2,7 @@ import {
   columnClicked,
   resetGame,
   startGame,
+  submitScore,
   updateGameBoard,
   updatePlayer
 } from './game';
@@ -63,6 +64,16 @@ describe('actions/game', () => {
       const action = startGame();
 
       expect(action.type).toEqual('START_GAME');
+    });
+
+  });
+
+  describe('submitScore', () => {
+
+    it('dispatches the correct action', () => {
+      const action = submitScore();
+
+      expect(action.type).toEqual('SUBMIT_SCORE');
     });
 
   });
