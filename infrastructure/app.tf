@@ -28,6 +28,12 @@ resource "aws_ecs_task_definition" "4dots_app" {
     "name": "4dots_app",
     "links": [
       "mongodb:mongodb"
+    ],
+    "portMappings": [
+      {
+        "hostPort": 8080,
+        "containerPort": 8080
+      }
     ]
   }
 ]
