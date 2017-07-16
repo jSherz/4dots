@@ -40,7 +40,16 @@ describe('WinModal (connected)', () => {
 
     expect(store.getActions().length).toEqual(0);
 
+    // Stub out axios
+    const dummyPost = jest.fn();
+    dummyPost.mockReturnValueOnce({ statusCode: 200, saved: true });
+
+    const axios = require('axios');
+    axios.post = dummyPost;
+
     component.find('button').simulate('click');
+
+    expect(dummyPost).toHaveBeenCalledWith('https://4dots-api.jsherz.com/submit-win', { name: 'Stormzy' });
 
     expect(store.getActions().length).toEqual(1);
 

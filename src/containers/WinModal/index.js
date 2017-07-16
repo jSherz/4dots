@@ -11,7 +11,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    submitScore: () => dispatch(submitScore())
+    submitScore: (name) => dispatch(submitScore(undefined, name)) // Pass undefined to get the default http client
   }
 };
 

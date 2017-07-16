@@ -21,8 +21,11 @@ export const gameReducer = (state = initialState, action) => {
         gameStarted: true
       };
 
-    case GameActions.RESET_GAME:
-      return initialState;
+    case GameActions.SUBMIT_SCORE:
+      return {
+        ...initialState,
+        players: state.players
+      };
 
     case GameActions.PLACE_PIECE:
       const column = action.payload;

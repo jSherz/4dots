@@ -21,7 +21,7 @@ export class WinModal extends Component {
           <p>Congratulations, <strong>{winner.name}</strong> - you win!</p>
 
           <p id="win-modal-controls">
-            <button onClick={submitScore}>Submit score</button>
+            <button onClick={() => submitScore(winner.name)}>Submit score</button>
           </p>
         </div>
       </Modal>

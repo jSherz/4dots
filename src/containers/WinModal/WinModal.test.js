@@ -27,7 +27,7 @@ describe('WinModal', () => {
 
     component.find('#win-modal-controls button').simulate('click');
 
-    expect(submitScore).toHaveBeenCalled();
+    expect(submitScore).toHaveBeenCalledWith(winner.name);
   });
 
 });

@@ -1,7 +1,6 @@
 import {
   columnClicked,
   hideLeaderboard,
-  resetGame,
   startGame,
   showLeaderboard,
   submitScore,
@@ -12,16 +11,6 @@ import {
 import { Players } from '../model';
 
 describe('actions/game', () => {
-
-  describe('resetGame', () => {
-
-    it('dispatches the correct action', () => {
-      const action = resetGame();
-
-      expect(action.type).toEqual('RESET_GAME');
-    });
-
-  });
 
   describe('updateGameBoard', () => {
 
@@ -74,9 +63,17 @@ describe('actions/game', () => {
   describe('submitScore', () => {
 
     it('dispatches the correct action', () => {
-      const action = submitScore();
+      const dummyPost = jest.fn();
+      dummyPost.mockReturnValueOnce('dummy-axios-result');
+
+      const dummyHttpClient = { post: dummyPost };
+      const name = 'Robert';
+
+      const action = submitScore(dummyHttpClient, name);
 
       expect(action.type).toEqual('SUBMIT_SCORE');
+      expect(action.payload).toEqual('dummy-axios-result');
+      expect(dummyPost).toHaveBeenCalledWith('https://4dots-api.jsherz.com/submit-win', { name });
     });
 
   });

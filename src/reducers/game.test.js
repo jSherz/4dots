@@ -2,9 +2,9 @@ import { gameReducer } from './game';
 import {
   columnClicked,
   hideLeaderboard,
-  resetGame,
   showLeaderboard,
   startGame,
+  submitScore,
   updateLeaderboard,
   updatePlayer
 } from '../actions/game';
@@ -45,9 +45,9 @@ describe('reducers/game', () => {
 
   });
 
-  describe('when it receives RESET_GAME', () => {
+  describe('when it receives SUBMIT_SCORE', () => {
 
-    it('clears the board and players', () => {
+    it('clears the board and submits the score', () => {
       const state = {
         currentPlayer: Players.PLAYER_B,
         gameBoard: makeBoard(
@@ -66,14 +66,25 @@ describe('reducers/game', () => {
         winner: Players.PLAYER_B
       };
 
-      const result = gameReducer(state, resetGame());
+      // We return a value rather than use a promise here as we're not wiring up the redux-promise middleware here
+      const dummyHttpClient = {
+        post() {
+          return {
+            data: { statusCode: 200, saved: true }
+          };
+        }
+      };
+
+      const result = gameReducer(state, submitScore(dummyHttpClient));
 
       expect(result.currentPlayer).toEqual(Players.PLAYER_A);
       expect(result.gameBoard).toEqual(Board.create());
-      expect(result.gameStarted).toEqual(false);
-      expect(result.players[Players.PLAYER_A].name).toEqual('');
-      expect(result.players[Players.PLAYER_B].name).toEqual('');
       expect(result.winner).toBeUndefined();
+
+      // Don't clear player's names - allow to change though with gameStarted=false
+      expect(result.players[Players.PLAYER_A].name).toEqual('Charlie');
+      expect(result.players[Players.PLAYER_B].name).toEqual('Joseph');
+      expect(result.gameStarted).toEqual(false);
     });
 
   });
