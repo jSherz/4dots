@@ -1,0 +1,35 @@
+$border-colour: #27bf8f
+$button-colour: #efefef
+
+#leaderboard-results
+  width: 100%
+  border: 0
+  padding: 0
+
+  td, th
+    box-sizing: border-box
+    padding: 0.5em
+    border: solid 0.1em $border-colour
+    margin: 0
+    border-collapse: collapse
+
+  th
+    text-align: center
+    background: lighten($border-colour, 10%)
+    letter-spacing: 0.06em
+
+.leaderboard-player-name
+  width: 60%
+
+.leaderboard-player-wins
+  width: 30%
+  text-align: right
+
+#leaderboard-modal-controls
+  text-align: right
+
+  button
+    background: linear-gradient(to top, darken($button-colour, 10%) 0%, $button-colour 100%)
+    color: black
+    border: 0
+    padding: 0.3em 1em

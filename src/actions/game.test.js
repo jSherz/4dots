@@ -1,9 +1,12 @@
 import {
   columnClicked,
+  hideLeaderboard,
   resetGame,
   startGame,
+  showLeaderboard,
   submitScore,
   updateGameBoard,
+  updateLeaderboard,
   updatePlayer
 } from './game';
 import { Players } from '../model';
@@ -74,6 +77,33 @@ describe('actions/game', () => {
       const action = submitScore();
 
       expect(action.type).toEqual('SUBMIT_SCORE');
+    });
+
+  });
+
+  describe('showLeaderboard', () => {
+
+    it('dispatches the correct action', () => {
+      const dummyGet = jest.fn();
+      dummyGet.mockReturnValueOnce('dummy-axios-result');
+
+      const dummyHttpClient = { get: dummyGet };
+
+      const action = showLeaderboard(dummyHttpClient);
+
+      expect(action.type).toEqual('SHOW_LEADERBOARD');
+      expect(action.payload).toEqual('dummy-axios-result');
+      expect(dummyGet).toHaveBeenCalledWith('https://4dots-api.jsherz.com/leaderboard');
+    });
+
+  });
+
+  describe('hideLeaderboard', () => {
+
+    it('dispatches the correct action', () => {
+      const action = hideLeaderboard();
+
+      expect(action.type).toEqual('HIDE_LEADERBOARD');
     });
 
   });

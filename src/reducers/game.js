@@ -1,5 +1,5 @@
 import * as GameActions from '../actions/game';
-import { Player, Players } from '../model';
+import { Leaderboard, Player, Players } from '../model';
 import { Board } from '../model/Board';
 
 const initialState = {
@@ -9,7 +9,8 @@ const initialState = {
   players: {
     [Players.PLAYER_A]: new Player(''),
     [Players.PLAYER_B]: new Player('')
-  }
+  },
+  showLeaderboard: false
 };
 
 export const gameReducer = (state = initialState, action) => {
@@ -55,6 +56,29 @@ export const gameReducer = (state = initialState, action) => {
           }
         }
       };
+
+    case GameActions.HIDE_LEADERBOARD:
+      return {
+        ...state,
+        showLeaderboard: false
+      };
+
+    case GameActions.SHOW_LEADERBOARD:
+      if (action.payload.data) {
+        return {
+          ...state,
+          leaderboard: new Leaderboard(action.payload.data.map((result) => {
+            return {
+              name: result.name,
+              numWins: result.num_wins
+            };
+          })),
+          showLeaderboard: true
+        };
+      } else {
+        alert('Failed to load leaderboard - please try again later.');
+        return state;
+      }
 
     default:
       return state

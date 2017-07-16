@@ -6,6 +6,7 @@ import PlayerModal from '../PlayerModal';
 import GameBoard from '../GameBoard';
 import { Player, Players } from '../../model';
 import WinModal from '../WinModal';
+import LeaderboardModal from '../LeaderboardModal';
 
 describe('components/App', () => {
 
@@ -17,6 +18,8 @@ describe('components/App', () => {
         currentPlayer={Players.PLAYER_A}
         gameStarted
         players={players}
+        showLeaderboard={false}
+        showLeaderboardClicked={jest.fn()}
       />
     );
 
@@ -34,6 +37,8 @@ describe('components/App', () => {
         currentPlayer={Players.PLAYER_B}
         gameStarted={false}
         players={players}
+        showLeaderboard={false}
+        showLeaderboardClicked={jest.fn()}
       />
     );
 
@@ -48,6 +53,8 @@ describe('components/App', () => {
         currentPlayer={Players.PLAYER_B}
         gameStarted
         players={players}
+        showLeaderboard={false}
+        showLeaderboardClicked={jest.fn()}
         winner={Players.PLAYER_B}
       />
     );
@@ -55,6 +62,41 @@ describe('components/App', () => {
     expect(component.find(WinModal)).not.toBeEmpty();
     expect(component.find(PlayerModal)).toBeEmpty();
     expect(component.find(GameBoard)).not.toBeEmpty();
+  });
+
+  it('fires the correct function when the show leaderboard button is pressed', () => {
+    const showLeaderboardClicked = jest.fn();
+    const component = shallow(
+      <App
+        currentPlayer={Players.PLAYER_B}
+        gameStarted
+        players={players}
+        showLeaderboard={false}
+        showLeaderboardClicked={showLeaderboardClicked}
+      />
+    );
+
+    expect(showLeaderboardClicked).not.toHaveBeenCalled();
+
+    component.find('#show-leaderboard button').simulate('click');
+
+    expect(showLeaderboardClicked).toHaveBeenCalled();
+  });
+
+  it('renders the leaderboard if showLeaderboard=true', () => {
+    const component = shallow(
+      <App
+        currentPlayer={Players.PLAYER_B}
+        gameStarted
+        players={players}
+        showLeaderboard
+        showLeaderboardClicked={jest.fn()}
+      />
+    );
+
+    const leaderboard = component.find(LeaderboardModal);
+
+    expect(leaderboard).not.toBeEmpty();
   });
 
 });

@@ -6,6 +6,7 @@ import GameBoard from '../GameBoard';
 import PlayerModal from '../PlayerModal';
 import { Players } from '../../model';
 import WinModal from '../WinModal';
+import LeaderboardModal from '../LeaderboardModal';
 
 class App extends Component {
 
@@ -13,6 +14,8 @@ class App extends Component {
     currentPlayer: PropTypes.oneOf(Players.VALID_PLAYERS).isRequired,
     gameStarted: PropTypes.bool.isRequired,
     players: PropTypes.shape(Players.propTypes).isRequired,
+    showLeaderboard: PropTypes.bool.isRequired,
+    showLeaderboardClicked: PropTypes.func.isRequired,
     winner: PropTypes.string
   };
 
@@ -30,7 +33,7 @@ class App extends Component {
   }
 
   render() {
-    const { gameStarted, winner } = this.props;
+    const { gameStarted, showLeaderboard, showLeaderboardClicked, winner } = this.props;
 
     return (
       <div id="app" className="App">
@@ -43,8 +46,13 @@ class App extends Component {
 
           <GameBoard/>
 
+          <p id="show-leaderboard">
+            <button onClick={showLeaderboardClicked}>Show leaderboard</button>
+          </p>
+
           {gameStarted || <PlayerModal/>}
           {winner && <WinModal/>}
+          {showLeaderboard && <LeaderboardModal/>}
         </section>
 
         <footer>
