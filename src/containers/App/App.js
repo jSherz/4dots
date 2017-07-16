@@ -47,7 +47,7 @@ class App extends Component {
           <GameBoard/>
 
           <p id="show-leaderboard">
-            <button onClick={showLeaderboardClicked}>Show leaderboard</button>
+            <button onClick={showLeaderboardClicked}>Hall of fame</button>
           </p>
 
           {gameStarted || <PlayerModal/>}
