@@ -1,8 +1,26 @@
 language: node_js
+
 node_js:
   - "6"
+
+services: mongodb
+
+install:
+  # Frontend
+  - yarn run install
+
+  # Backend
+  - cd backend
+  - yarn run install
+  - cd ../
+
 script:
+  # Frontend
   - yarn run build-css
   - yarn run test -- --coverage
   - yarn run coveralls
   - yarn run build
+
+  # Backend
+  - cd backend
+  - yarn run test
