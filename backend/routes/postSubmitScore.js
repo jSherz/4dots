@@ -2,12 +2,10 @@ const Joi = require('joi');
 
 const postSubmitScore = (service) => {
   return {
-    config: {
-      cors: true,
-    },
     method: 'POST',
     path: '/submit-win',
     config: {
+      cors: true,
       validate: {
         payload: {
           name: Joi.string().min(3).max(100).required()
