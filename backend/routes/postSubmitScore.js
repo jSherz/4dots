@@ -2,6 +2,9 @@ const Joi = require('joi');
 
 const postSubmitScore = (service) => {
   return {
+    config: {
+      cors: true,
+    },
     method: 'POST',
     path: '/submit-win',
     config: {
