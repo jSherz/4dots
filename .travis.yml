@@ -37,7 +37,7 @@ script:
   - aws s3 cp --recursive build/ s3://4dots-frontend/
   - aws configure set preview.cloudfront true
   # The goggles... they do nothing! https://www.youtube.com/watch?v=PWFF7ecArBk
-  - "echo \"{ \\\"Quantity\\\": 1, \\\"Items\\\": [\\\"/index.html\\\"] }, \\\"CallerReference\\\": \\\"invalidate-index-$(date \"+%Y-%m-%d_%H_%M_%S\")\\\" }\" > invalidate-batch.json"
+  - "echo \"{ \\\"Paths\\\": { \\\"Quantity\\\": 1, \\\"Items\\\": [\\\"/index.html\\\"] }, \\\"CallerReference\\\": \\\"invalidate-index-$(date \"+%Y-%m-%d_%H_%M_%S\")\\\" }\" > invalidate-batch.json"
   - aws cloudfront create-invalidation --distribution-id E310QXY5ENUJKV --invalidation-batch file://invalidate-batch.json
 
   # Backend
