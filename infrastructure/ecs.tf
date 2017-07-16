@@ -1,3 +1,9 @@
+# NB: This certificate must exist in us-east-1
+variable "4dots_jsherz_com_certificate_arn" {
+  type    = "string"
+  default = "arn:aws:acm:us-east-1:247940857651:certificate/1ad713c4-f935-4da5-a10f-0521b0b2b1b0"
+}
+
 # Create a cluster to run our containers
 # See: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_clusters.html
 resource "aws_ecs_cluster" "4dots" {

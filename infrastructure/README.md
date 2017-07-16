@@ -14,7 +14,8 @@ This folder contains the [Terraform](https://www.terraform.io/) configuration to
 
 ## Running
 
-The HCL requires a ACM certificate setup for the ELB to run an HTTPS listener (see `elb.tf`).
+The HCL requires a ACM certificate setup for the ELB to run an HTTPS listener (see `elb.tf`) and for the CloudFront
+distribution (see `frontend.tf`).
 
 ```bash
 # View changes
