@@ -12,7 +12,11 @@
     "mongoose": "^4.11.2"
   },
   "scripts": {
-    "start": "node index"
+    "start": "node index",
+    "test": "lab --pattern '.*\\.test'"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "code": "^4.1.0",
+    "lab": "^14.1.1"
+  }
 }
