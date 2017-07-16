@@ -20,7 +20,7 @@ before_install:
 
 install:
   # Frontend
-  - cd
+  - cd $TRAVIS_BUILD_DIR
   - yarn install
 
   # Backend
