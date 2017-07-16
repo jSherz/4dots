@@ -13,6 +13,7 @@ before_install:
   # Setup AWS CLI
   - mkdir -p /tmp/aws-cli
   - curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "/tmp/aws-cli/awscli-bundle.zip"
+  - cd /tmp/aws-cli
   - unzip "awscli-bundle.zip"
   - ./awscli-bundle/install -b /tmp/aws-cli/aws
   - export PATH=/tmp/aws-cli:$PATH
