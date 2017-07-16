@@ -39,6 +39,6 @@ script:
   - cd backend
   - yarn run test
   - docker build -t 4dots .
-  - /bin/sh -c $(aws ecr get-login --no-include-email --region eu-west-2)
+  - /bin/sh -c '$(aws ecr get-login --no-include-email --region eu-west-2)'
   - docker tag 4dots:latest 247940857651.dkr.ecr.eu-west-2.amazonaws.com/4dots:latest
   - docker push 247940857651.dkr.ecr.eu-west-2.amazonaws.com/4dots:latest
