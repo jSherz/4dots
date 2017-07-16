@@ -7,11 +7,11 @@ services: mongodb
 
 install:
   # Frontend
-  - yarn run install
+  - yarn install
 
   # Backend
   - cd backend
-  - yarn run install
+  - yarn install
   - cd ../
 
 script:
