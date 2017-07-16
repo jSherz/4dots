@@ -8,15 +8,17 @@ import registerServiceWorker from './registerServiceWorker';
 import gameReducer from './reducers';
 import promiseMiddleware from 'redux-promise';
 
-const middleware = [applyMiddleware(promiseMiddleware)];
+let middleware;
 
 if (window.__REDUX_DEVTOOLS_EXTENSION__) {
-  middleware.push(window.__REDUX_DEVTOOLS_EXTENSION__());
+  middleware = compose(applyMiddleware(promiseMiddleware), window.__REDUX_DEVTOOLS_EXTENSION__());
+} else {
+  middleware = applyMiddleware(promiseMiddleware);
 }
 
 let store = createStore(
   gameReducer,
-  compose(middleware)
+  middleware
 );
 
 ReactDOM.render(
